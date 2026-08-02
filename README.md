@@ -6,3 +6,4 @@ Back-end web development projects.
 | --- | --- |
 | `python_variable_annotations` | Type annotations and the `typing` module |
 | `python_async_function` | `async`/`await`, coroutines and `asyncio.Task` |
+| `python_async_comprehension` | Async generators and async comprehensions |
