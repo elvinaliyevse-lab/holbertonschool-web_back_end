@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-""" Pymongo """
+"""Script contains function that that inserts docs
+"""
+import pymongo
 
 
-def insert_school(mongo_collection: object, **kwargs):
-    """function that inserts a new document in a collection
-    based on kwargs
+def insert_school(mongo_collection, **kwargs):
+    """Function inserts docs in collection
 
     Args:
-        mongo_collection (object): pymongo collection object
+        mongo_collection (_type_): collection insert into
+
+    Returns:
+        _type_: id
     """
-    data = mongo_collection.insert_one({**kwargs})
-    return data.inserted_id
+    obj = mongo_collection.insert_one(kwargs)
+    return obj.inserted_id
