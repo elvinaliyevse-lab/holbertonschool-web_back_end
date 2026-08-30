@@ -49,19 +49,24 @@ class Server:
         Returns:
             Dict: dictionary with a key-value pairs
         """
-        assert(type(index) == int and type(page_size) == int)
-        assert(0 <= index < len(self.dataset()))
+        assert index is None or isinstance(index, int)
+        assert isinstance(page_size, int) and page_size > 0
+        if index is None:
+            index = 0
         dataset = self.indexed_dataset()
+        assert 0 <= index < len(self.dataset())
+
         data = []
         next_index = index
-        for _ in range(page_size):
-            while not dataset.get(next_index):
-                next_index += 1
-            data.append(dataset.get(next_index))
+        limit = len(self.dataset())
+        while len(data) < page_size and next_index < limit:
+            row = dataset.get(next_index)
+            if row is not None:
+                data.append(row)
             next_index += 1
         return {
             'index': index,
-            'next_index': next_index,
+            'data': data,
             'page_size': page_size,
-            'data': data
+            'next_index': next_index
         }

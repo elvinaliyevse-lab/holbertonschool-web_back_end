@@ -2,8 +2,22 @@
 """Simple pagination"""
 import csv
 import math
-from typing import List
-index_range = __import__('0-simple_helper_function').index_range
+from typing import List, Tuple
+
+
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """Start and end index for the given pagination parameters
+
+    Args:
+        page (int): Number of the page, starting at 1.
+        page_size (int): Number of items per page.
+
+    Returns:
+        Tuple[int, int]: particular pagination parameters
+    """
+    start_index = page_size * (page - 1)
+    page_range = start_index + page_size
+    return (start_index, page_range)
 
 
 class Server:
@@ -36,7 +50,7 @@ class Server:
         Returns:
             List[List]: List of elements in a page
         """
-        assert(type(page_size) == int and type(page) == int)
-        assert(page > 0 and page_size > 0)
+        assert isinstance(page, int) and isinstance(page_size, int)
+        assert page > 0 and page_size > 0
         beginning, end = index_range(page, page_size)
         return self.dataset()[beginning:end]
