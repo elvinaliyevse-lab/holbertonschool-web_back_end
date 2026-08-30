@@ -10,8 +10,7 @@ if __name__ == "__main__":
     school_collection = client.my_db.school
 
     j_schools = [
-        {'name': "Holberton school", 'topics': [
-            "Algo", "C", "Python", "React"]},
+        {'name': "Holberton school", 'topics': ["Algo", "C", "Python", "React"]},
         {'name': "UCSF", 'topics': ["Algo", "MongoDB"]},
         {'name': "UCLA", 'topics': ["C", "Python"]},
         {'name': "UCSD", 'topics': ["Cassandra"]},
@@ -22,5 +21,10 @@ if __name__ == "__main__":
 
     schools = schools_by_topic(school_collection, "Python")
     for school in schools:
-        print("[{}] {} {}".format(school.get('_id'),
-              school.get('name'), school.get('topics', "")))
+        print(
+            "[{}] {} {}".format(
+                school.get('_id'),
+                school.get('name'),
+                school.get(
+                    'topics',
+                    "")))
